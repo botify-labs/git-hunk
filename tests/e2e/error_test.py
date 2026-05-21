@@ -6,7 +6,7 @@ from .conftest import GitHunkCLI
 
 
 def test_not_a_git_repo(tmp_path: Path) -> None:
-    repo = GitRepo(str(tmp_path))
+    repo = GitRepo(tmp_path)
     cli = GitHunkCLI(repo)
     r = cli.run("list")
     assert r.returncode != 0
@@ -14,7 +14,7 @@ def test_not_a_git_repo(tmp_path: Path) -> None:
 
 
 def test_bare_repo(tmp_path: Path) -> None:
-    repo = GitRepo(str(tmp_path))
+    repo = GitRepo(tmp_path)
     repo.run("git", "init", "--bare")
     cli = GitHunkCLI(repo)
     r = cli.run("list")
